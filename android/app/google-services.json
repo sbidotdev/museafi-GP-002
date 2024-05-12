@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "936381910842",
+    "project_id": "museafi-c8f99",
+    "storage_bucket": "museafi-c8f99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936381910842:android:88d71cbf99ebf3501dca03",
+        "android_client_info": {
+          "package_name": "com.example.musefi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwhdfgSHli4PZyfjkhnER6lzeD85inLAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
