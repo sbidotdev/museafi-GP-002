@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -58,280 +59,291 @@ class _PatientRegState extends State<PatientReg> {
     return Scaffold(
       body: SafeArea(
         maintainBottomViewPadding: true,
-        child: Container(
-          height: MediaQuery.sizeOf(context).height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.red.shade300,
-                Colors.redAccent,
-              ],
+        child: Form(
+          autovalidateMode: AutovalidateMode.always,
+          child: Container(
+            height: MediaQuery.sizeOf(context).height,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.red.shade300,
+                  Colors.redAccent,
+                ],
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30),
-            child: ListView(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 50),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "تسجيل مريض جديد",
-                    style: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
+              child: ListView(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 50),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "تسجيل مريض جديد",
+                      style: GoogleFonts.cairo(
+                        textStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: name,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      decoration: InputDecoration(
-                        hintText: 'إسم المريض',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: name,
+                        textDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          hintText: 'إسم المريض',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: age,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      decoration: InputDecoration(
-                        hintText: 'عمر المريض',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: age,
+                        textDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          hintText: 'عمر المريض',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: country,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      decoration: InputDecoration(
-                        hintText: 'البلد',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: country,
+                        textDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          hintText: 'البلد',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: dist,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      decoration: InputDecoration(
-                        hintText: 'الحي',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: dist,
+                        textDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          hintText: 'الحي',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: blood,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      decoration: InputDecoration(
-                        hintText: 'فصيلة الدم',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: blood,
+                        textDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          hintText: 'فصيلة الدم',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: phone,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: 'رقم الهاتف / الجوال',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: phone,
+                        textDirection: TextDirection.rtl,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'رقم الهاتف / الجوال',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: phonebro,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: 'رقم احد الاقارب (اخ، اخت، صديق..)',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: phonebro,
+                        textDirection: TextDirection.rtl,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'رقم احد الاقارب (اخ، اخت، صديق..)',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: email,
+                  Container(
+                    height: 80,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      decoration: InputDecoration(
-                        hintText: 'البريد الإلكتروني',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        controller: email,
+                        validator: (value) => EmailValidator.validate(value!)
+                            ? null
+                            : "الرجاء التحقق من البريد الإلكتروني",
+                        textDirection: TextDirection.rtl,
+                        decoration: InputDecoration(
+                          hintText: 'البريد الإلكتروني',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextField(
-                      controller: password,
+                  Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Directionality(
                       textDirection: TextDirection.rtl,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'كلمة المرور',
-                        border: InputBorder.none,
-                        hintTextDirection: TextDirection.rtl,
+                      child: TextField(
+                        controller: password,
+                        textDirection: TextDirection.rtl,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'كلمة المرور',
+                          border: InputBorder.none,
+                          hintTextDirection: TextDirection.rtl,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {
-                    //check all fields
-                    if (name.text == "" ||
-                        age.text == "" ||
-                        country.text == "" ||
-                        blood.text == "" ||
-                        phone.text == "" ||
-                        email.text == "" ||
-                        password.text == "") {
-                      Fluttertoast.showToast(
-                        msg: "الرجاء عدم ترك الحقول فارغة !",
-                        toastLength: Toast.LENGTH_SHORT,
-                      );
-                    } else {
-                      if (phone.text.length < 10) {
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: () {
+                      //check all fields
+                      if (name.text == "" ||
+                          age.text == "" ||
+                          country.text == "" ||
+                          blood.text == "" ||
+                          phone.text == "" ||
+                          email.text == "" ||
+                          password.text == "") {
                         Fluttertoast.showToast(
-                          msg: "رقم الهاتف يجب ان يحتوي على ١٠ ارقام",
+                          msg: "الرجاء عدم ترك الحقول فارغة !",
                           toastLength: Toast.LENGTH_SHORT,
                         );
                       } else {
-                        // create user in auth process
-                        FirebaseAuth.instance.createUserWithEmailAndPassword(
-                          email: email.text,
-                          password: password.text,
-                        );
+                        if (phone.text.length < 10) {
+                          Fluttertoast.showToast(
+                            msg: "رقم الهاتف يجب ان يحتوي على ١٠ ارقام",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                        } else if (phonebro.text.length < 10) {
+                          Fluttertoast.showToast(
+                            msg: "رقم الهاتف يجب ان يحتوي على ١٠ ارقام",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                        } else {
+                          // create user in auth process
+                          FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: email.text,
+                            password: password.text,
+                          );
 
-                        //register user in firestore
-                        addUser();
+                          //register user in firestore
+                          addUser();
 
-                        //back to home
-                        Fluttertoast.showToast(
-                          msg: "تم تسجيل مريض جديد بنجاح !",
-                          toastLength: Toast.LENGTH_SHORT,
-                        );
+                          //back to home
+                          Fluttertoast.showToast(
+                            msg: "تم تسجيل مريض جديد بنجاح !",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
 
-                        //back to home page
-                        Navigator.pop(context);
+                          //back to home page
+                          Navigator.pop(context);
+                        }
                       }
-                    }
-                  },
-                  child: Text(
-                    "التسجيل",
-                    style: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
+                    },
+                    child: Text(
+                      "التسجيل",
+                      style: GoogleFonts.cairo(
+                        textStyle: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

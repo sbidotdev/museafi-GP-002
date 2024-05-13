@@ -75,11 +75,46 @@ class _HomeState extends State<HomeMobile> {
               useref.update({"SOS_Status": true});
 
               //add the patient to warining
-              List newwarning = [];
+              Map datacurrent = {
+                "date": Timestamp.now(),
+                "name": name,
+                "status": "سيئة",
+              };
+              var hosid = "000";
+              List warn;
               FirebaseFirestore.instance
                   .collection("Hospitals")
                   .snapshots()
-                  .forEach((element) {});
+                  .forEach((element) {
+                //collection
+                element.docs.forEach((hos) {
+                  //hospital >> 3
+                  Map hosmap = hos.data();
+                  List hospat = hosmap["patients"];
+                  hospat.forEach((hospat) {
+                    //patient
+                    if (hospat["email"] == _useremail) {
+                      print("DOC >>>" + hospat["email"]);
+                      print("CUR >>>" + _useremail);
+                      //ADD NEW WARN
+                      warn = hosmap["warning"];
+                      if (warn.length <= 1) {
+                        warn.add(datacurrent);
+                        FirebaseFirestore.instance
+                            .collection("Hospitals")
+                            .doc(hos.id)
+                            .update({"warning": warn});
+                        print("NEW WARN ADDED !!");
+                      }
+                    } else {
+                      print("DOC >>>" + hospat["email"]);
+                      print("CUR >>>" + _useremail);
+                      print(
+                          "لايوجد مستشفى مشترك معها المريض لإرسال الحالة الخطرة");
+                    }
+                  });
+                });
+              });
             }
 
             //build
@@ -465,10 +500,10 @@ class _HomeState extends State<HomeMobile> {
                                       begin: Alignment.centerLeft,
                                       end: Alignment.bottomCenter,
                                       colors: [
-                                        rateheart <= 90 && rateheart >= 60
+                                        rateheart >= 60
                                             ? Colors.blue.shade300
                                             : Colors.red.shade300,
-                                        rateheart <= 90 && rateheart >= 60
+                                        rateheart >= 60
                                             ? Colors.blue
                                             : Colors.red,
                                       ],
