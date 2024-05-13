@@ -222,74 +222,109 @@ class _HomeWebState extends State<HomeWeb> {
                                             child: Row(
                                               textDirection: TextDirection.rtl,
                                               children: [
-                                                Text("الإسم: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["name"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Text(
+                                                  "الإسم: " +
+                                                      snapshot
+                                                          .data!
+                                                          .docs[0]["patients"]
+                                                              [index]["name"]
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
-                                                Text("العمر: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["age"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Container(
+                                                  width: 30,
+                                                  child: Text(" - "),
                                                 ),
-                                                Text("البلد: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["country"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Text(
+                                                  "العمر: " +
+                                                      snapshot
+                                                          .data!
+                                                          .docs[0]["patients"]
+                                                              [index]["age"]
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
-                                                Text("الحي: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["dist"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Container(
+                                                  width: 30,
+                                                  child: Text(" - "),
                                                 ),
-                                                Text("الحالة الصحية: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["status"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Text(
+                                                  "البلد: " +
+                                                      snapshot
+                                                          .data!
+                                                          .docs[0]["patients"]
+                                                              [index]["country"]
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
-                                                Text("رقم الجوال: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["phone"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Container(
+                                                  width: 30,
+                                                  child: Text(" - "),
                                                 ),
-                                                Text("رقم جوال مقرب: " +
-                                                    snapshot
-                                                        .data!
-                                                        .docs[0]["patients"]
-                                                            [index]["phonebro"]
-                                                        .toString()),
-                                                SizedBox(
-                                                  width: 50,
+                                                Text(
+                                                  "الحي: " +
+                                                      snapshot
+                                                          .data!
+                                                          .docs[0]["patients"]
+                                                              [index]["dist"]
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
-                                                Text("تاريخ التسجيل: " +
-                                                    UserTime.toDate()
-                                                        .toString()),
+                                                Container(
+                                                  width: 30,
+                                                  child: Text(" - "),
+                                                ),
+                                                // Text("الحالة الصحية: " +
+                                                //     snapshot
+                                                //         .data!
+                                                //         .docs[0]["patients"]
+                                                //             [index]["status"]
+                                                //         .toString()),
+                                                // SizedBox(
+                                                //   width: 50,
+                                                // ),
+                                                Text(
+                                                  "رقم الجوال: " +
+                                                      snapshot
+                                                          .data!
+                                                          .docs[0]["patients"]
+                                                              [index]["phone"]
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                                Container(
+                                                  width: 30,
+                                                  child: Text(" - "),
+                                                ),
+                                                Text(
+                                                  "رقم جوال مقرب: " +
+                                                      snapshot
+                                                          .data!
+                                                          .docs[0]["patients"]
+                                                              [index]
+                                                              ["phonebro"]
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                                Container(
+                                                  width: 30,
+                                                  child: Text(" - "),
+                                                ),
+                                                Text(
+                                                  "تاريخ التسجيل: " +
+                                                      UserTime.toDate()
+                                                          .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
                                                 SizedBox(
-                                                  width: 50,
+                                                  width: 20,
                                                 ),
                                                 snapshot.data!.docs[0]
                                                                 ["patients"]
@@ -326,7 +361,7 @@ class _HomeWebState extends State<HomeWeb> {
                                                         ),
                                                       )
                                                     : InkWell(
-                                                        onTap: () {
+                                                        onTap: () async {
                                                           Fluttertoast
                                                               .showToast(
                                                             msg:
@@ -345,46 +380,27 @@ class _HomeWebState extends State<HomeWeb> {
                                                                       .data!
                                                                       .docs[0]
                                                                       .id);
-                                                          hospitalref.update({
-                                                            "patients": [
-                                                              {
-                                                                "age": snapshot
-                                                                            .data!
-                                                                            .docs[0]
-                                                                        [
-                                                                        "patients"]
-                                                                    [
-                                                                    index]["age"],
-                                                                "agree": true,
-                                                                "country": snapshot
-                                                                            .data!
-                                                                            .docs[0]
-                                                                        [
-                                                                        "patients"]
-                                                                    [
-                                                                    index]["country"],
-                                                                "dist": snapshot
-                                                                            .data!
-                                                                            .docs[0]
-                                                                        [
-                                                                        "patients"]
-                                                                    [
-                                                                    index]["dist"],
-                                                                "name": snapshot
-                                                                            .data!
-                                                                            .docs[0]
-                                                                        [
-                                                                        "patients"]
-                                                                    [
-                                                                    index]["name"],
-                                                                "regdate":
-                                                                    Timestamp
-                                                                        .now(),
-                                                                "status":
-                                                                    "سيئة",
-                                                              }
-                                                            ]
-                                                          });
+
+                                                          DocumentSnapshot
+                                                              olddatadoc =
+                                                              await hospitalref
+                                                                  .get();
+
+                                                          Map<String, dynamic>
+                                                              olddata =
+                                                              olddatadoc.data()
+                                                                  as Map<String,
+                                                                      dynamic>;
+
+                                                          List patients =
+                                                              olddata[
+                                                                  "patients"];
+
+                                                          patients[index]
+                                                              ["agree"] = true;
+
+                                                          hospitalref
+                                                              .set(olddata);
                                                         },
                                                         child: Container(
                                                           width: 80,

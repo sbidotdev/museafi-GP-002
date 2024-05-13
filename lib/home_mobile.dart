@@ -65,7 +65,7 @@ class _HomeState extends State<HomeMobile> {
                 sugerblood +
                 oxygen;
 
-            print(Total);
+            print(">>>>> TOTAL:: " + Total.toString());
 
             //ACTIVE SOS in case less than  total
             if (Total <= 380) {
@@ -73,6 +73,13 @@ class _HomeState extends State<HomeMobile> {
                   .collection("Users")
                   .doc(usersnapshot.data!.docs[0].id);
               useref.update({"SOS_Status": true});
+
+              //add the patient to warining
+              List newwarning = [];
+              FirebaseFirestore.instance
+                  .collection("Hospitals")
+                  .snapshots()
+                  .forEach((element) {});
             }
 
             //build
@@ -880,9 +887,10 @@ class _HomeState extends State<HomeMobile> {
                                                   List patients =
                                                       olddata["patients"];
 
-                                                  patients.add();
+                                                  patients.add(data);
 
                                                   hosref.set(olddata);
+                                                  print(olddata);
 
                                                   Fluttertoast.showToast(
                                                     msg:
